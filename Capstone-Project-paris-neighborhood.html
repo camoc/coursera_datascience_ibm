@@ -7,7 +7,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
+<script>
+(function() {
+  function addWidgetsRenderer() {
+    var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
+    var scriptElement = document.createElement('script');
+    var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
+    var widgetState;
 
+    // Fallback for older version:
+    try {
+      widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
+
+      if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
+        widgetRendererSrc = 'https://unpkg.com/jupyter-js-widgets@*/dist/embed.js';
+      }
+    } catch(e) {}
+
+    scriptElement.src = widgetRendererSrc;
+    document.body.appendChild(scriptElement);
+  }
+
+  document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
+}());
+</script>
 
 <style type="text/css">
     /*!
@@ -13084,6 +13107,22 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li><a href="#item1">Description</a></li>
+<li><a href="#item1">Data source</a></li>
+<li><a href="#item1">Data analylis and cleaning</a></li>
+<li><a href="#item1">Displaying Paris's Map</a></li>
+<li><a href="#item1">Using Foursquare data to load Paris's venues</a></li>
+<li><a href="#item1">Load data of paris's borough population</a></li>
+<li><a href="#item1">Correlation berween number venus and population by borough</a></li>
+<li><a href="#item1">Cluster Neighborhoods</a></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="My-project-description">My project description<a class="anchor-link" href="#My-project-description">&#182;</a></h2>
 </div>
 </div>
@@ -14958,6 +14997,12 @@ CLIENT_SECRET:0QDSFHVBM3Z1DPVSSWXMCESYJNHNPPJMRT4OJUGZV3IFNDC0
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Correlation-berween-number-venus-and-population-by-borough">Correlation berween number venus and population by borough<a class="anchor-link" href="#Correlation-berween-number-venus-and-population-by-borough">&#182;</a></h1>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -21080,6 +21125,10 @@ Executing transaction: done
 </body>
 
  
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {}, "version_major": 2, "version_minor": 0}
+</script>
 
 
 </html>
